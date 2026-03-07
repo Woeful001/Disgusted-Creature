@@ -13,6 +13,7 @@ import static org.ecnumc.ecnu.ECNUForge.MODID;
 @OnlyIn(Dist.CLIENT)
 public class ECNULayerLocations {
 	public static final ModelLayerLocation NULLSET = new ModelLayerLocation(new ResourceLocation(MODID, "nullset"), "main");
+	public static final ModelLayerLocation MOSQUITO = new ModelLayerLocation(new ResourceLocation(MODID, "mosquito"), "main");
 
 	private ECNULayerLocations() {
 	}

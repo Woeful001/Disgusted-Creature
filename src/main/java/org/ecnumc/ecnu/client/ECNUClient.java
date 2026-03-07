@@ -4,7 +4,9 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import org.ecnumc.ecnu.client.models.MosquitoModel;
 import org.ecnumc.ecnu.client.models.NullsetModel;
+import org.ecnumc.ecnu.client.renderers.MosquitoRenderer;
 import org.ecnumc.ecnu.client.renderers.NullsetRenderer;
 import org.ecnumc.ecnu.common.registries.ECNUEntityTypes;
 
@@ -23,6 +25,7 @@ public final class ECNUClient {
 	@SubscribeEvent
 	public static void onRegisterLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
 		event.registerLayerDefinition(ECNULayerLocations.NULLSET, NullsetModel::createBodyLayer);
+		event.registerLayerDefinition(ECNULayerLocations.MOSQUITO, MosquitoModel::createBodyLayer);
 	}
 
 	/**
@@ -31,7 +34,9 @@ public final class ECNUClient {
 	 */
 	@SubscribeEvent
 	public static void onRegisterRenderer(EntityRenderersEvent.RegisterRenderers event) {
+		// 延迟到事件触发时才获取RegistryObject的值
 		event.registerEntityRenderer(ECNUEntityTypes.NULLSET.get(), NullsetRenderer::new);
+		event.registerEntityRenderer(ECNUEntityTypes.MOSQUITO.get(), MosquitoRenderer::new);
 	}
 
 	private ECNUClient() {

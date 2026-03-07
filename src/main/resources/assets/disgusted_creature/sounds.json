@@ -1,0 +1,11 @@
+{
+  "mosquito.fly": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "disgusted_creature:mosquito/fly",
+        "stream": false
+      }
+    ]
+  }
+}

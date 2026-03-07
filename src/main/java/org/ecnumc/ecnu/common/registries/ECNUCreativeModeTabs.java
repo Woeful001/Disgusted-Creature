@@ -21,9 +21,15 @@ public final class ECNUCreativeModeTabs {
 	public static final RegistryObject<CreativeModeTab> ECNU = REGISTER.register(
 			"main", () -> CreativeModeTab.builder()
 					.withTabsBefore(CreativeModeTabs.SPAWN_EGGS)
-					.title(Component.translatable("itemGroup.ecnu"))
-					.icon(() -> new ItemStack(ECNUItems.NULLSET.get()))
-					.displayItems((flags, output) -> output.accept(ECNUItems.NULLSET.get()))
+					.title(Component.translatable("itemGroup.disgusted_creature.main"))
+					.icon(() -> new ItemStack(ECNUItems.DISGUSTED_STONE.get()))
+					.displayItems((flags, output) ->
+							{
+								output.accept(ECNUItems.NULLSET.get());
+								output.accept(ECNUItems.DISGUSTED_STONE.get());
+								output.accept(ECNUItems.MOSQUITO_SPAWN_EGG.get());
+							}
+					)
 					.build()
 	);
 

@@ -1,0 +1,29 @@
+{
+  "language": "Chinese",
+  "language.code": "zh_cn",
+  "language.region": "China",
+  "itemGroup.disgusted_creature.main": "恶心生物",
+
+  "item.disgusted_creature.nullset": "空集",
+  "item.disgusted_creature.nullset.description": "空集社长味大喵！",
+  "entity.disgusted_creature.mosquito": "蚊子",
+  "item.disgusted_creature.mosquito_spawn_egg": "蚊子刷怪蛋",
+  "item.disgusted_creature.mosquito_spawn_egg.description": "在水边生成蚊子",
+
+  "block.disgusted_creature.disgusted_stone": "作呕之石",
+  "item.disgusted_creature.disgusted_stone": "作呕之石",
+  "item.disgusted_creature.disgusted_stone.description":"会吸引某些生物",
+
+  "entity.disgusted_creature.nullset": "空集",
+
+  "effect.disgusted_creature.ban": "禁用",
+  "effect.disgusted_creature.ban.description": "禁用盔甲槽位",
+  "effect.disgusted_creature.itching": "瘙痒",
+  "effect.disgusted_creature.itching.description": "禁用盔甲并获得力量和急迫效果",
+  "effect.disgusted_creature.riling": "惹怒",
+  "effect.disgusted_creature.riling.description": "受到的伤害翻倍",
+  "effect.disgusted_creature.evil": "阴暗",
+  "effect.disgusted_creature.evil.description": "造成伤害时恢复生命值",
+  "effect.disgusted_creature.disgusted": "作呕",
+  "effect.disgusted_creature.disgusted.description": "受到伤害翻倍，造成伤害时恢复生命值"
+}

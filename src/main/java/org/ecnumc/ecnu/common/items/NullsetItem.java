@@ -78,6 +78,6 @@ public class NullsetItem extends Item {
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> components, TooltipFlag isAdvanced) {
 		super.appendHoverText(stack, level, components, isAdvanced);
-		components.add(Component.translatable("item.ecnu.nullset.description").withStyle(ChatFormatting.YELLOW));
+		components.add(Component.translatable("item.disgusted_creature.nullset.description").withStyle(ChatFormatting.YELLOW));
 	}
 }

@@ -1,0 +1,29 @@
+{
+  "language": "English",
+  "language.code": "en_us",
+  "language.region": "United States",
+  "itemGroup.disgusted_creature.main": "Disgusted Creature",
+
+  "item.disgusted_creature.nullset": "Nullset",
+  "item.disgusted_creature.nullset.description": "Make ECNUMC Great Again!",
+  "entity.disgusted_creature.mosquito": "Mosquito",
+  "item.disgusted_creature.mosquito_spawn_egg": "Mosquito Spawn Egg",
+  "item.disgusted_creature.mosquito_spawn_egg.description": "Spawns mosquitoes near water",
+
+  "block.disgusted_creature.disgusted_stone": "Disgusted Stone",
+  "item.disgusted_creature.disgusted_stone": "Disgusted Stone",
+  "item.disgusted_creature.disgusted_stone.description":"To appeal something",
+
+  "entity.disgusted_creature.nullset": "Nullset",
+
+  "effect.disgusted_creature.ban": "Ban",
+  "effect.disgusted_creature.ban.description": "Disable armor slots",
+  "effect.disgusted_creature.itching": "Itching",
+  "effect.disgusted_creature.itching.description": "Disable armor and gain strength and haste effects",
+  "effect.disgusted_creature.riling": "Riling",
+  "effect.disgusted_creature.riling.description": "Take double damage",
+  "effect.disgusted_creature.evil": "Evil",
+  "effect.disgusted_creature.evil.description": "Restore health when dealing damage",
+  "effect.disgusted_creature.disgusted": "Disgusted",
+  "effect.disgusted_creature.disgusted.description": "Take double damage, restore health when dealing damage"
+}

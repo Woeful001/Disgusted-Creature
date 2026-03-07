@@ -1,6 +1,6 @@
 {
   "parent":"item/generated",
   "textures": {
-    "layer0":"ecnu:item/nullset"
+    "layer0":"disgusted_creature:item/nullset"
   }
 }

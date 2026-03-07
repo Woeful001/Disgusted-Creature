@@ -1,0 +1,23 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": [
+    "minecraft:river",
+    "minecraft:beach",
+    "minecraft:swamp",
+    "minecraft:mangrove_swamp"
+  ],
+  "spawners": [
+    {
+      "type": "disgusted_creature:mosquito",
+      "weight": 500,
+      "minCount": 1,
+      "maxCount": 3
+    }
+  ],
+  "spawn_costs": {
+    "disgusted_creature:mosquito": {
+      "energy_budget": 0.15,
+      "charge": 0.8
+    }
+  }
+}

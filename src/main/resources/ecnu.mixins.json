@@ -4,6 +4,8 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "ecnu.refmap.json",
   "mixins": [
+    "CriticalHitMixin",
+    "LifeStealMixin"
   ],
   "minVersion": "0.8",
   "client": [
