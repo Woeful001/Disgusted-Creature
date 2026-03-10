@@ -11,6 +11,9 @@ import net.minecraftforge.registries.RegistryObject;
 
 import static org.ecnumc.ecnu.ECNUForge.MODID;
 
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionUtils;
+
 /**
  * Mod Creative Mode Tabs
  * @author liudongyu
@@ -28,9 +31,24 @@ public final class ECNUCreativeModeTabs {
 								output.accept(ECNUItems.NULLSET.get());
 								output.accept(ECNUItems.DISGUSTED_STONE.get());
 								output.accept(ECNUItems.MOSQUITO_SPAWN_EGG.get());
+								output.accept(ECNUItems.MOSQUITO_MOUTH.get());
+								output.accept(ECNUItems.DISGUSTED_EGG.get());
+
+								// Add custom potion ItemStacks (with Potion NBT) so they show up in the creative tab
+								output.accept(PotionUtils.setPotion(new ItemStack(Items.POTION), ECNUPotions.ITCHING.get()));
+								output.accept(PotionUtils.setPotion(new ItemStack(Items.SPLASH_POTION), ECNUPotions.ITCHING.get()));
+								output.accept(PotionUtils.setPotion(new ItemStack(Items.LINGERING_POTION), ECNUPotions.ITCHING.get()));
+
+								output.accept(PotionUtils.setPotion(new ItemStack(Items.POTION), ECNUPotions.STRONG_ITCHING.get()));
+								output.accept(PotionUtils.setPotion(new ItemStack(Items.SPLASH_POTION), ECNUPotions.STRONG_ITCHING.get()));
+								output.accept(PotionUtils.setPotion(new ItemStack(Items.LINGERING_POTION), ECNUPotions.STRONG_ITCHING.get()));
+
+								output.accept(PotionUtils.setPotion(new ItemStack(Items.POTION), ECNUPotions.LONGER_ITCHING.get()));
+								output.accept(PotionUtils.setPotion(new ItemStack(Items.SPLASH_POTION), ECNUPotions.LONGER_ITCHING.get()));
+								output.accept(PotionUtils.setPotion(new ItemStack(Items.LINGERING_POTION), ECNUPotions.LONGER_ITCHING.get()));
 							}
-					)
-					.build()
+						)
+						.build()
 	);
 
 	private ECNUCreativeModeTabs() {

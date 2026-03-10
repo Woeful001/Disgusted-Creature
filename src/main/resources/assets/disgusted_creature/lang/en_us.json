@@ -6,15 +6,19 @@
 
   "item.disgusted_creature.nullset": "Nullset",
   "item.disgusted_creature.nullset.description": "Make ECNUMC Great Again!",
-  "entity.disgusted_creature.mosquito": "Mosquito",
+
   "item.disgusted_creature.mosquito_spawn_egg": "Mosquito Spawn Egg",
   "item.disgusted_creature.mosquito_spawn_egg.description": "Spawns mosquitoes near water",
+  "item.disgusted_creature.mosquito_mouth": "Mosquito Mouth",
 
   "block.disgusted_creature.disgusted_stone": "Disgusted Stone",
   "item.disgusted_creature.disgusted_stone": "Disgusted Stone",
-  "item.disgusted_creature.disgusted_stone.description":"To appeal something",
+  "block.disgusted_creature.disgusted_egg": "Disgusted Egg",
+  "item.disgusted_creature.disgusted_egg": "Disgusted Egg",
 
   "entity.disgusted_creature.nullset": "Nullset",
+  "entity.disgusted_creature.mosquito": "Mosquito",
+  "entity.disgusted_creature.shalltear_bloodfallen": "Shalltear Bloodfallen",
 
   "effect.disgusted_creature.ban": "Ban",
   "effect.disgusted_creature.ban.description": "Disable armor slots",
@@ -25,5 +29,17 @@
   "effect.disgusted_creature.evil": "Evil",
   "effect.disgusted_creature.evil.description": "Restore health when dealing damage",
   "effect.disgusted_creature.disgusted": "Disgusted",
-  "effect.disgusted_creature.disgusted.description": "Take double damage, restore health when dealing damage"
+  "effect.disgusted_creature.disgusted.description": "Take double damage, restore health when dealing damage",
+
+  "item.minecraft.potion.effect.itching": "Potion of Itching",
+  "item.minecraft.splash_potion.effect.itching": "Splash Potion of Itching",
+  "item.minecraft.lingering_potion.effect.itching": "Lingering Potion of Itching",
+
+  "item.minecraft.potion.effect.strong_itching": "Potion of Itching",
+  "item.minecraft.splash_potion.effect.strong_itching": "Splash Potion of Itching",
+  "item.minecraft.lingering_potion.effect.strong_itching": "Lingering Potion of Itching",
+
+  "item.minecraft.potion.effect.longer_itching": "Potion of Itching",
+  "item.minecraft.splash_potion.effect.longer_itching": "Splash Potion of Itching",
+  "item.minecraft.lingering_potion.effect.longer_itching": "Lingering Potion of Itching"
 }

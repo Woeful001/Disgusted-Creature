@@ -7,8 +7,19 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.ecnumc.ecnu.common.ECNUContent;
+import org.ecnumc.ecnu.common.registries.ECNUItems;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.alchemy.PotionBrewing;
+import net.minecraft.world.item.alchemy.Potions;
+import org.ecnumc.ecnu.common.registries.ECNUPotions;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.Item;
+
+import java.lang.reflect.Method;
 
 /**
  * Mod Main Class
@@ -17,22 +28,22 @@ import org.slf4j.LoggerFactory;
 @SuppressWarnings("java:S1118")
 @Mod(ECNUForge.MODID)
 public class ECNUForge {
-	public static final String MODID = "disgusted_creature";
-	private static final Logger LOGGER = LoggerFactory.getLogger(ECNUForge.class);
+    public static final String MODID = "disgusted_creature";
+    private static final Logger LOGGER = LoggerFactory.getLogger(ECNUForge.class);
 
-	public ECNUForge() {
-		LOGGER.info("ECNU模组开始初始化...");
-		IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
-		ECNUContent.modConstruction(modBus);
-		LOGGER.info("ECNU模组内容注册完成");
+    public ECNUForge() {
+        LOGGER.info("ECNU模组开始初始化...");
+        IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
+        ECNUContent.modConstruction(modBus);
+        LOGGER.info("ECNU模组内容注册完成");
 
-		IEventBus forgeBus = MinecraftForge.EVENT_BUS;
-		forgeBus.register(this); // 注册当前类以监听Forge事件
-		LOGGER.info("ECNU模组初始化完成!");
-	}
-	
-	@SubscribeEvent
-	public void onServerStarting(net.minecraftforge.event.server.ServerStartingEvent event) {
-		LOGGER.info("服务器启动，恶心生物模组已加载");
-	}
+        IEventBus forgeBus = MinecraftForge.EVENT_BUS;
+        forgeBus.register(this); // 注册当前类以监听Forge事件
+        LOGGER.info("ECNU模组初始化完成!");
+    }
+
+    @SubscribeEvent
+    public void onServerStarting(net.minecraftforge.event.server.ServerStartingEvent event) {
+        LOGGER.info("服务器启动，恶心生物模组已加载");
+    }
 }

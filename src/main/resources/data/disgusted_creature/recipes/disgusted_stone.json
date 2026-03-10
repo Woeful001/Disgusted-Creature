@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MRM",
+    "SDS",
+    "MRM"
+  ],
+  "key": {
+    "M": { "item": "disgusted_creature:mosquito_mouth" },
+    "R": { "item": "minecraft:rotten_flesh" },
+    "S": { "item": "minecraft:spider_eye" },
+    "D": { "item": "minecraft:dirt" }
+  },
+  "result": {
+    "item": "disgusted_creature:disgusted_stone",
+    "count": 1
+  }
+}

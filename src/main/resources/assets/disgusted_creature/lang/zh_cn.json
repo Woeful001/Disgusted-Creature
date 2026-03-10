@@ -6,15 +6,20 @@
 
   "item.disgusted_creature.nullset": "空集",
   "item.disgusted_creature.nullset.description": "空集社长味大喵！",
-  "entity.disgusted_creature.mosquito": "蚊子",
+
   "item.disgusted_creature.mosquito_spawn_egg": "蚊子刷怪蛋",
   "item.disgusted_creature.mosquito_spawn_egg.description": "在水边生成蚊子",
+  "item.disgusted_creature.mosquito_mouth": "蚊子嘴",
 
   "block.disgusted_creature.disgusted_stone": "作呕之石",
   "item.disgusted_creature.disgusted_stone": "作呕之石",
-  "item.disgusted_creature.disgusted_stone.description":"会吸引某些生物",
+  "block.disgusted_creature.disgusted_egg": "恶心的蛋",
+  "item.disgusted_creature.disgusted_egg": "恶心的蛋",
+
 
   "entity.disgusted_creature.nullset": "空集",
+  "entity.disgusted_creature.mosquito": "蚊子",
+  "entity.disgusted_creature.shalltear_bloodfallen": "夏提雅·布拉德弗伦",
 
   "effect.disgusted_creature.ban": "禁用",
   "effect.disgusted_creature.ban.description": "禁用盔甲槽位",
@@ -25,5 +30,17 @@
   "effect.disgusted_creature.evil": "阴暗",
   "effect.disgusted_creature.evil.description": "造成伤害时恢复生命值",
   "effect.disgusted_creature.disgusted": "作呕",
-  "effect.disgusted_creature.disgusted.description": "受到伤害翻倍，造成伤害时恢复生命值"
+  "effect.disgusted_creature.disgusted.description": "受到伤害翻倍，造成伤害时恢复生命值",
+
+  "item.minecraft.potion.effect.itching": "瘙痒药水",
+  "item.minecraft.splash_potion.effect.itching": "喷溅型瘙痒药水",
+  "item.minecraft.lingering_potion.effect.itching": "滞留型瘙痒药水",
+
+  "item.minecraft.potion.effect.strong_itching": "瘙痒药水",
+  "item.minecraft.splash_potion.effect.strong_itching": "喷溅型瘙痒药水",
+  "item.minecraft.lingering_potion.effect.strong_itching": "滞留型瘙痒药水",
+
+  "item.minecraft.potion.effect.longer_itching": "瘙痒药水",
+  "item.minecraft.splash_potion.effect.longer_itching": "喷溅型瘙痒药水",
+  "item.minecraft.lingering_potion.effect.longer_itching": "滞留型瘙痒药水"
 }

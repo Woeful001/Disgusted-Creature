@@ -29,19 +29,20 @@ public final class ECNUItems {
 	 * Item for the President of ECNUMC.
 	 */
 	public static final RegistryObject<NullsetItem> NULLSET = REGISTER.register("nullset", () -> new NullsetItem(new Item.Properties()));
-	public static final RegistryObject<BlockItem> DISGUSTED_STONE = REGISTER.register("disgusted_stone", () -> new BlockItem(
-			ECNUBlocks.DISGUSTED_STONE.get()
-			, new Item.Properties().fireResistant()));
-	/**
-	 * Spawn egg for Mosquito - 使用ForgeSpawnEggItem和Supplier解决注册顺序问题
-	 */
+	public static final RegistryObject<BlockItem> DISGUSTED_STONE = REGISTER.register("disgusted_stone",
+			() -> new BlockItem(ECNUBlocks.DISGUSTED_STONE.get(), new Item.Properties().fireResistant()));
 	public static final RegistryObject<ForgeSpawnEggItem> MOSQUITO_SPAWN_EGG = REGISTER.register("mosquito_spawn_egg",
 			() -> new ForgeSpawnEggItem(
-                    ECNUEntityTypes.MOSQUITO::get, // 使用Supplier延迟获取
+                    ECNUEntityTypes.MOSQUITO::get,
 					0x2C2C2C,
 					0xFF69B4,
 					new Item.Properties()
 			));
+	public static final RegistryObject<Item> MOSQUITO_MOUTH = REGISTER.register("mosquito_mouth", () -> new Item(new Item.Properties()));
+	public static final RegistryObject<Item> DISGUSTED_EGG = REGISTER.register("disgusted_egg",
+			() -> new BlockItem(ECNUBlocks.DISGUSTED_EGG.get(), new Item.Properties().fireResistant()));
+
+
 
 	private ECNUItems() {
 	}

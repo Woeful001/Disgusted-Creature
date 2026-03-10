@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SCS",
+    "NDN",
+    "SBS"
+  ],
+  "key": {
+    "S": { "item": "disgusted_creature:disgusted_stone" },
+    "C": { "item": "minecraft:crying_obsidian" },
+    "N": { "item": "minecraft:nether_star" },
+    "D": { "item": "minecraft:dragon_egg" },
+    "B": { "item": "minecraft:sculk_shrieker" }
+  },
+  "result": {
+    "item": "disgusted_creature:disgusted_egg",
+    "count": 1
+  }
+}

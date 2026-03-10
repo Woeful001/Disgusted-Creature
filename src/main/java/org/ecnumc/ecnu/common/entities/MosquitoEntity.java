@@ -34,13 +34,14 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.phys.AABB;
 import org.ecnumc.ecnu.common.registries.ECNUEffects;
+import org.ecnumc.ecnu.common.registries.ECNUItems;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class MosquitoEntity extends Bee {
     private static final Logger LOGGER = LoggerFactory.getLogger(MosquitoEntity.class);
     private int attackCooldown = 0;
-    private static final int ATTACK_COOLDOWN_TICKS = 1200; // 攻击冷却
+    private static final int ATTACK_COOLDOWN_TICKS = 600; // 攻击冷却，30s
     private static final double FLYING_HEIGHT = 1.0D; // 离地高度
 
     // 简化生成检查方法，避免复杂逻辑导致的注册错误
@@ -112,7 +113,6 @@ public class MosquitoEntity extends Bee {
                 .add(Attributes.FOLLOW_RANGE, 16.0D)
                 .add(Attributes.ATTACK_DAMAGE, 0.1D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.8D)
-                // 添加攻击范围属性
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0D); // 无击退，保持接近目标
     }
 
@@ -213,9 +213,24 @@ public class MosquitoEntity extends Bee {
         return SoundEvents.BEE_DEATH;
     }
 
+    // Add a guaranteed drop of the mosquito mouth item when this entity dies
+    @Override
+    protected void dropCustomDeathLoot(DamageSource source, int looting, boolean recentlyHit) {
+        super.dropCustomDeathLoot(source, looting, recentlyHit);
+        if (!this.level().isClientSide) {
+            // Always spawn the registered mosquito mouth item (100% chance)
+            this.spawnAtLocation(ECNUItems.MOSQUITO_MOUTH.get());
+        }
+    }
+
     @Override
     public boolean causeFallDamage(float fallDistance, float multiplier, DamageSource source) {
         return false; // 蚊子免疫摔落伤害
+    }
+
+    @Override
+    public boolean hasStung() {
+        return false; // 蚊子不会像蜜蜂一样蛰人后死亡
     }
 
     /**

@@ -14,6 +14,7 @@ import static org.ecnumc.ecnu.ECNUForge.MODID;
 public class ECNULayerLocations {
 	public static final ModelLayerLocation NULLSET = new ModelLayerLocation(new ResourceLocation(MODID, "nullset"), "main");
 	public static final ModelLayerLocation MOSQUITO = new ModelLayerLocation(new ResourceLocation(MODID, "mosquito"), "main");
+	public static final ModelLayerLocation SHALLTEAR_BLOODFALLEN = new ModelLayerLocation(new ResourceLocation(MODID, "shalltear_bloodfallen"), "main");
 
 	private ECNULayerLocations() {
 	}
