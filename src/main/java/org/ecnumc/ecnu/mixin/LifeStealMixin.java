@@ -1,10 +1,17 @@
 package org.ecnumc.ecnu.mixin;
 
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 import org.ecnumc.ecnu.common.effects.EvilEffect;
+import org.ecnumc.ecnu.common.entities.ShalltearBloodfallenEntity;
+import org.ecnumc.ecnu.common.item.DisgustSwordItem;
 import org.ecnumc.ecnu.common.registries.ECNUEffects;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -15,40 +22,74 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  */
 @Mixin(LivingEntity.class)
 public class LifeStealMixin {
-    
+
     @Inject(method = "actuallyHurt", at = @At("TAIL"))
     private void onActuallyHurtTail(DamageSource damageSource, float damageAmount, CallbackInfo ci) {
-        // 检查伤害来源是否为另一个生物
-        if (damageSource.getEntity() instanceof LivingEntity attacker) {
-            if (attacker.hasEffect(ECNUEffects.Evil.get()) ||
-                    attacker.hasEffect(ECNUEffects.DISGUSTED.get())) {
-                // 获取阴暗效果实例
-                var effect = attacker.getEffect(ECNUEffects.Evil.get());
-                if(effect == null)
-                {
-                    effect = attacker.getEffect(ECNUEffects.DISGUSTED.get());
-                }
-                if (effect != null) {
-                    // 安全地获取治疗百分比
-                    float healPercentage = 0.5f; // 默认值
-                    
-                    // 尝试获取EvilEffect实例来获得准确的治疗百分比
-                    try {
-                        if (ECNUEffects.Evil.get() instanceof EvilEffect evilEffect ) {
-                            healPercentage = evilEffect.getHealPercentage();
-                        }
-                    } catch (Exception e) {
-                        // 如果转换失败，使用默认值
-                        healPercentage = 0.5f;
-                    }
-                    
-                    // 计算治疗量
-                    float healAmount = damageAmount * healPercentage * (effect.getAmplifier() + 1);
-                    
-                    // 为攻击者恢复生命值
-                    attacker.heal(healAmount);
-                }
-            }
+        if (!(damageSource.getEntity() instanceof LivingEntity attacker) || attacker.level().isClientSide || damageAmount <= 0.0F) {
+            return;
         }
+
+        float healAmount = ecnu$getEffectLifeSteal(attacker, damageAmount);
+        healAmount += ecnu$getWeaponLifeSteal(attacker, damageSource, damageAmount);
+
+        if (healAmount > 0.0F) {
+            attacker.heal(healAmount);
+        }
+    }
+
+    @Unique
+    private static float ecnu$getWeaponLifeSteal(LivingEntity attacker, DamageSource damageSource, float damageAmount) {
+        if (attacker instanceof ShalltearBloodfallenEntity) {
+            return 0.0F;
+        }
+        if (!ecnu$isWeaponLifeStealDamage(attacker, damageSource)) {
+            return 0.0F;
+        }
+
+        ItemStack weaponStack = attacker.getMainHandItem();
+        if (weaponStack.getItem() instanceof DisgustSwordItem disgustSwordItem) {
+            return damageAmount * disgustSwordItem.getLifeStealRatio();
+        }
+        return 0.0F;
+    }
+
+    @Unique
+    private static boolean ecnu$isWeaponLifeStealDamage(LivingEntity attacker, DamageSource damageSource) {
+        if (damageSource.is(DamageTypes.PLAYER_ATTACK) || damageSource.is(DamageTypes.MOB_ATTACK)) {
+            return true;
+        }
+
+        Entity directEntity = damageSource.getDirectEntity();
+        return directEntity == null || directEntity == attacker;
+    }
+
+    @Unique
+    private static float ecnu$getEffectLifeSteal(LivingEntity attacker, float damageAmount) {
+        if (attacker instanceof ShalltearBloodfallenEntity) {
+            return 0.0F;
+        }
+
+        if (!attacker.hasEffect(ECNUEffects.Evil.get()) && !attacker.hasEffect(ECNUEffects.DISGUSTED.get())) {
+            return 0.0F;
+        }
+
+        MobEffectInstance effect = attacker.getEffect(ECNUEffects.Evil.get());
+        if (effect == null) {
+            effect = attacker.getEffect(ECNUEffects.DISGUSTED.get());
+        }
+        if (effect == null) {
+            return 0.0F;
+        }
+
+        float healPercentage = 0.5F;
+        try {
+            if (ECNUEffects.Evil.get() instanceof EvilEffect evilEffect) {
+                healPercentage = evilEffect.getHealPercentage();
+            }
+        } catch (Exception ignored) {
+            // Fall back to the default 50% lifesteal ratio.
+        }
+
+        return damageAmount * healPercentage * (effect.getAmplifier() + 1);
     }
 }

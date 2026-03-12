@@ -10,11 +10,18 @@
   "item.disgusted_creature.mosquito_spawn_egg": "Mosquito Spawn Egg",
   "item.disgusted_creature.mosquito_spawn_egg.description": "Spawns mosquitoes near water",
   "item.disgusted_creature.mosquito_mouth": "Mosquito Mouth",
+  "item.disgusted_creature.disgusted_heart": "Disgusted Heart",
 
   "block.disgusted_creature.disgusted_stone": "Disgusted Stone",
   "item.disgusted_creature.disgusted_stone": "Disgusted Stone",
   "block.disgusted_creature.disgusted_egg": "Disgusted Egg",
   "item.disgusted_creature.disgusted_egg": "Disgusted Egg",
+  "item.disgusted_creature.disgusted_wooden_sword": "Wooden Disgust Sword",
+  "item.disgusted_creature.disgusted_stone_sword": "Stone Disgust Sword",
+  "item.disgusted_creature.disgusted_iron_sword": "Iron Disgust Sword",
+  "item.disgusted_creature.disgusted_diamond_sword": "Diamond Disgust Sword",
+  "item.disgusted_creature.disgusted_netherite_sword": "Netherite Disgust Sword",
+  "item.disgusted_creature.disgusted_sword.lifesteal": "Lifesteal: %s%%",
 
   "entity.disgusted_creature.nullset": "Nullset",
   "entity.disgusted_creature.mosquito": "Mosquito",

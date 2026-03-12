@@ -10,11 +10,18 @@
   "item.disgusted_creature.mosquito_spawn_egg": "蚊子刷怪蛋",
   "item.disgusted_creature.mosquito_spawn_egg.description": "在水边生成蚊子",
   "item.disgusted_creature.mosquito_mouth": "蚊子嘴",
+  "item.disgusted_creature.disgusted_heart": "作呕之心",
 
   "block.disgusted_creature.disgusted_stone": "作呕之石",
   "item.disgusted_creature.disgusted_stone": "作呕之石",
   "block.disgusted_creature.disgusted_egg": "恶心的蛋",
   "item.disgusted_creature.disgusted_egg": "恶心的蛋",
+  "item.disgusted_creature.disgusted_wooden_sword": "作呕之木剑",
+  "item.disgusted_creature.disgusted_stone_sword": "作呕之石剑",
+  "item.disgusted_creature.disgusted_iron_sword": "作呕之铁剑",
+  "item.disgusted_creature.disgusted_diamond_sword": "作呕之钻剑",
+  "item.disgusted_creature.disgusted_netherite_sword": "作呕之剑",
+  "item.disgusted_creature.disgusted_sword.lifesteal": "吸血：%s%%",
 
 
   "entity.disgusted_creature.nullset": "空集",

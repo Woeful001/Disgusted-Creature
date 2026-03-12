@@ -6,6 +6,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.level.BlockGetter;
@@ -17,6 +18,7 @@ import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.ecnumc.ecnu.common.entities.MosquitoEntity;
 import org.ecnumc.ecnu.common.entities.ShalltearBloodfallenEntity;
 import org.ecnumc.ecnu.common.registries.ECNUEntityTypes;
 
@@ -33,6 +35,8 @@ public class DisgustedEggBlock extends DragonEggBlock {
 	private static final int SUMMON_TIME_TICKS = 20 * 60;
 	private static final int HORIZONTAL_RADIUS = 1;
 	private static final int HEIGHT = 5;
+	private static final int MOSQUITO_COUNT = 100;
+	private static final float EXPLOSION_POWER = 4.0F;
 	private static final Map<SummonKey, Integer> SUMMON_PROGRESS = new ConcurrentHashMap<>();
 
 	public DisgustedEggBlock() {
@@ -90,13 +94,11 @@ public class DisgustedEggBlock extends DragonEggBlock {
 		}
 
 		int progress = SUMMON_PROGRESS.getOrDefault(key, 0) + CHECK_INTERVAL_TICKS;
+		spawnWarningParticles(level, pos, progress);
 		if (progress >= SUMMON_TIME_TICKS) {
-			if (spawnBoss(level, pos)) {
-				SUMMON_PROGRESS.remove(key);
-				level.removeBlock(pos, false);
-				return;
-			}
-			progress = SUMMON_TIME_TICKS - CHECK_INTERVAL_TICKS;
+			SUMMON_PROGRESS.remove(key);
+			triggerSummoningRitual(level, pos);
+			return;
 		}
 
 		SUMMON_PROGRESS.put(key, progress);
@@ -137,10 +139,59 @@ public class DisgustedEggBlock extends DragonEggBlock {
 		return true;
 	}
 
-	private boolean spawnBoss(ServerLevel level, BlockPos pos) {
+	private void spawnWarningParticles(ServerLevel level, BlockPos pos, int progress) {
+		float progressRatio = (float) progress / SUMMON_TIME_TICKS;
+		int soulFlames = Mth.clamp(2 + Mth.floor(progressRatio * 8.0F), 2, 10);
+		int smoke = Mth.clamp(4 + Mth.floor(progressRatio * 10.0F), 4, 14);
+		int electric = progress >= SUMMON_TIME_TICKS - 200 ? 2 : 0;
+		double centerX = pos.getX() + 0.5D;
+		double centerY = pos.getY() + 0.8D;
+		double centerZ = pos.getZ() + 0.5D;
+
+		level.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, centerX, centerY, centerZ, soulFlames, 0.35D, 0.45D, 0.35D, 0.01D);
+		level.sendParticles(ParticleTypes.LARGE_SMOKE, centerX, centerY + 0.2D, centerZ, smoke, 0.45D, 0.55D, 0.45D, 0.005D);
+		if (electric > 0) {
+			level.sendParticles(ParticleTypes.ELECTRIC_SPARK, centerX, centerY + 0.6D, centerZ, electric, 0.5D, 0.8D, 0.5D, 0.02D);
+		}
+		if (progress % 100 == 0) {
+			level.playSound(null, pos, SoundEvents.RESPAWN_ANCHOR_AMBIENT, SoundSource.HOSTILE, 0.6F, 0.8F + progressRatio * 0.3F);
+		}
+	}
+
+	private void triggerSummoningRitual(ServerLevel level, BlockPos pos) {
+		BlockPos summonPos = pos.above(2);
+		level.setWeatherParameters(0, 20 * 60, true, true);
+		level.playSound(null, pos, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.WEATHER, 4.0F, 0.9F);
+		level.removeBlock(pos, false);
+		level.explode(null, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, EXPLOSION_POWER, Level.ExplosionInteraction.NONE);
+		level.sendParticles(ParticleTypes.EXPLOSION_EMITTER, pos.getX() + 0.5D, pos.getY() + 0.8D, pos.getZ() + 0.5D, 1, 0.0D, 0.0D, 0.0D, 0.0D);
+		spawnMosquitoSwarm(level, summonPos);
+		spawnBoss(level, summonPos);
+	}
+
+	private void spawnMosquitoSwarm(ServerLevel level, BlockPos centerPos) {
+		for (int i = 0; i < MOSQUITO_COUNT; i++) {
+			MosquitoEntity mosquito = ECNUEntityTypes.MOSQUITO.get().create(level);
+			if (mosquito == null) {
+				continue;
+			}
+
+			double spawnX = centerPos.getX() + 0.5D + (level.random.nextDouble() - 0.5D) * 3.0D;
+			double spawnY = centerPos.getY() + level.random.nextDouble() * 1.5D;
+			double spawnZ = centerPos.getZ() + 0.5D + (level.random.nextDouble() - 0.5D) * 3.0D;
+			mosquito.moveTo(spawnX, spawnY, spawnZ, level.random.nextFloat() * 360.0F, 0.0F);
+			mosquito.finalizeSpawn(level, level.getCurrentDifficultyAt(centerPos), MobSpawnType.EVENT, null, null);
+			mosquito.setPersistenceRequired();
+			level.addFreshEntity(mosquito);
+		}
+		level.sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE, centerPos.getX() + 0.5D, centerPos.getY() + 0.5D, centerPos.getZ() + 0.5D, 80, 1.2D, 0.8D, 1.2D, 0.01D);
+		level.playSound(null, centerPos, SoundEvents.BEEHIVE_ENTER, SoundSource.HOSTILE, 1.4F, 0.6F);
+	}
+
+	private void spawnBoss(ServerLevel level, BlockPos pos) {
 		ShalltearBloodfallenEntity boss = ECNUEntityTypes.SHALLTEAR_BLOODFALLEN.get().create(level);
 		if (boss == null) {
-			return false;
+			return;
 		}
 
 		boss.moveTo(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, level.random.nextFloat() * 360.0F, 0.0F);
@@ -150,7 +201,6 @@ public class DisgustedEggBlock extends DragonEggBlock {
 		level.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, pos.getX() + 0.5D, pos.getY() + 1.0D, pos.getZ() + 0.5D, 40, 0.45D, 0.8D, 0.45D, 0.02D);
 		level.sendParticles(ParticleTypes.LARGE_SMOKE, pos.getX() + 0.5D, pos.getY() + 1.0D, pos.getZ() + 0.5D, 24, 0.35D, 0.6D, 0.35D, 0.01D);
 		level.playSound(null, pos, SoundEvents.END_PORTAL_SPAWN, SoundSource.HOSTILE, 1.0F, 0.85F);
-		return true;
 	}
 
 	private record SummonKey(ResourceKey<Level> dimension, BlockPos pos) {

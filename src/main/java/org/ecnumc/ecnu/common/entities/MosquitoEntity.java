@@ -102,7 +102,7 @@ public class MosquitoEntity extends Bee {
 
         // 攻击所有生物（包括玩家）- 增加搜索范围
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, LivingEntity.class, 20, true, false,
-                target -> !(target instanceof MosquitoEntity)));
+                target -> !(target instanceof MosquitoEntity) && !(target instanceof ShalltearBloodfallenEntity)));
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -131,19 +131,24 @@ public class MosquitoEntity extends Bee {
      * 保持离地1格高度飞行
      */
     private void maintainFlyingHeight() {
-        if (!this.level().isClientSide && this.isAlive()) {
-            BlockPos groundPos = BlockPos.containing(this.getX(), this.getY() - 1.0D, this.getZ());
-            
-            // 检查下方是否有固体方块
-            if (!this.level().getBlockState(groundPos).isAir()) {
-                // 如果离地高度不是1格，则调整Y坐标
-                double targetY = groundPos.getY() + 1.0D + FLYING_HEIGHT;
-                if (Math.abs(this.getY() - targetY) > 0.1D) {
-                    this.setPos(this.getX(), targetY, this.getZ());
+        maintainFlyingHeight(this, FLYING_HEIGHT);
+    }
+
+    public static void maintainFlyingHeight(Mob mob) {
+        maintainFlyingHeight(mob, FLYING_HEIGHT);
+    }
+
+    private static void maintainFlyingHeight(Mob mob, double flyingHeight) {
+        if (!mob.level().isClientSide && mob.isAlive()) {
+            BlockPos groundPos = BlockPos.containing(mob.getX(), mob.getY() - 1.0D, mob.getZ());
+
+            if (!mob.level().getBlockState(groundPos).isAir()) {
+                double targetY = groundPos.getY() + 1.0D + flyingHeight;
+                if (Math.abs(mob.getY() - targetY) > 0.1D) {
+                    mob.setPos(mob.getX(), targetY, mob.getZ());
                 }
             } else {
-                // 如果下方是空气，寻找最近的地面
-                this.findAndMaintainFlyingHeight();
+                findAndMaintainFlyingHeight(mob, flyingHeight);
             }
         }
     }
@@ -152,14 +157,17 @@ public class MosquitoEntity extends Bee {
      * 寻找并维持飞行高度
      */
     private void findAndMaintainFlyingHeight() {
+        findAndMaintainFlyingHeight(this, FLYING_HEIGHT);
+    }
+
+    private static void findAndMaintainFlyingHeight(Mob mob, double flyingHeight) {
         BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
-        
-        // 向下寻找地面
-        for (int y = (int)this.getY(); y >= this.level().getMinBuildHeight(); y--) {
-            mutablePos.set((int)this.getX(), y, (int)this.getZ());
-            if (!this.level().getBlockState(mutablePos).isAir()) {
-                double targetY = y + 1.0D + FLYING_HEIGHT;
-                this.setPos(this.getX(), targetY, this.getZ());
+
+        for (int y = (int) mob.getY(); y >= mob.level().getMinBuildHeight(); y--) {
+            mutablePos.set((int) mob.getX(), y, (int) mob.getZ());
+            if (!mob.level().getBlockState(mutablePos).isAir()) {
+                double targetY = y + 1.0D + flyingHeight;
+                mob.setPos(mob.getX(), targetY, mob.getZ());
                 break;
             }
         }
@@ -174,7 +182,7 @@ public class MosquitoEntity extends Bee {
 
     public boolean doHurtTarget(LivingEntity target) {
         // 添加安全检查，防止攻击无效目标
-        if (target == null || !target.isAlive() || target == this) {
+        if (target == null || !target.isAlive() || target == this || target instanceof ShalltearBloodfallenEntity) {
             return false;
         }
         
@@ -213,12 +221,11 @@ public class MosquitoEntity extends Bee {
         return SoundEvents.BEE_DEATH;
     }
 
-    // Add a guaranteed drop of the mosquito mouth item when this entity dies
+    // Add a 50% chance drop of the mosquito mouth item when this entity dies
     @Override
     protected void dropCustomDeathLoot(DamageSource source, int looting, boolean recentlyHit) {
         super.dropCustomDeathLoot(source, looting, recentlyHit);
-        if (!this.level().isClientSide) {
-            // Always spawn the registered mosquito mouth item (100% chance)
+        if (!this.level().isClientSide && this.random.nextFloat() < 0.5F) {
             this.spawnAtLocation(ECNUItems.MOSQUITO_MOUTH.get());
         }
     }
@@ -251,8 +258,8 @@ public class MosquitoEntity extends Bee {
                 return;
             }
             
-            // 确保目标不是其他蚊子
-            if (enemy instanceof MosquitoEntity) {
+            // 确保目标不是其他蚊子，也不是夏提雅
+            if (enemy instanceof MosquitoEntity || enemy instanceof ShalltearBloodfallenEntity) {
                 return;
             }
 

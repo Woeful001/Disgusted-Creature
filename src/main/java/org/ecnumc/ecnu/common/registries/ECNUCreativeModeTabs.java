@@ -32,7 +32,13 @@ public final class ECNUCreativeModeTabs {
 								output.accept(ECNUItems.DISGUSTED_STONE.get());
 								output.accept(ECNUItems.MOSQUITO_SPAWN_EGG.get());
 								output.accept(ECNUItems.MOSQUITO_MOUTH.get());
+								output.accept(ECNUItems.DISGUSTED_HEART.get());
 								output.accept(ECNUItems.DISGUSTED_EGG.get());
+								output.accept(ECNUItems.DISGUSTED_WOODEN_SWORD.get());
+								output.accept(ECNUItems.DISGUSTED_STONE_SWORD.get());
+								output.accept(ECNUItems.DISGUSTED_IRON_SWORD.get());
+								output.accept(ECNUItems.DISGUSTED_DIAMOND_SWORD.get());
+								output.accept(ECNUItems.DISGUSTED_NETHERITE_SWORD.get());
 
 								// Add custom potion ItemStacks (with Potion NBT) so they show up in the creative tab
 								output.accept(PotionUtils.setPotion(new ItemStack(Items.POTION), ECNUPotions.ITCHING.get()));

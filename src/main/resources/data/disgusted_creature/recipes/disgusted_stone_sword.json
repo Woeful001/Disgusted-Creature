@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DMD",
+    "MWM",
+    "DMD"
+  ],
+  "key": {
+    "D": { "item": "disgusted_creature:disgusted_stone" },
+    "M": { "item": "disgusted_creature:mosquito_mouth" },
+    "W": { "item": "disgusted_creature:disgusted_wooden_sword" }
+  },
+  "result": {
+    "item": "disgusted_creature:disgusted_stone_sword",
+    "count": 1
+  }
+}

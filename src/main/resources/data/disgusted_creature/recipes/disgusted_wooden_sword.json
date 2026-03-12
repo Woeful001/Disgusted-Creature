@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "M",
+    "M",
+    "S"
+  ],
+  "key": {
+    "M": { "item": "disgusted_creature:mosquito_mouth" },
+    "S": { "item": "minecraft:stick" }
+  },
+  "result": {
+    "item": "disgusted_creature:disgusted_wooden_sword",
+    "count": 1
+  }
+}
