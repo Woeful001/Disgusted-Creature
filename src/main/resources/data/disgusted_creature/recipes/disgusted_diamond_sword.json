@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DMD",
+    "MIM",
+    "DMD"
+  ],
+  "key": {
+    "D": { "item": "minecraft:diamond_block" },
+    "M": { "item": "disgusted_creature:mosquito_mouth" },
+    "I": { "item": "disgusted_creature:disgusted_iron_sword" }
+  },
+  "result": {
+    "item": "disgusted_creature:disgusted_diamond_sword",
+    "count": 1
+  }
+}
