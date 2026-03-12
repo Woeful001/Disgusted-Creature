@@ -83,12 +83,6 @@ public class ShalltearBloodfallenEntity extends PathfinderMob {
 			BossEvent.BossBarOverlay.PROGRESS
 	);
 
-	public ShalltearBloodfallenEntity(Level level) {
-		super(ECNUEntityTypes.SHALLTEAR_BLOODFALLEN.get(), level);
-		initFlightBehavior();
-		applyPhaseAttributes();
-	}
-
 	public ShalltearBloodfallenEntity(EntityType<? extends ShalltearBloodfallenEntity> entityType, Level level) {
 		super(entityType, level);
 		initFlightBehavior();
@@ -229,8 +223,8 @@ public class ShalltearBloodfallenEntity extends PathfinderMob {
 
 
 	private void ensurePermanentEffects() {
-		if (!this.hasEffect(ECNUEffects.Evil.get())) {
-			this.addEffect(new MobEffectInstance(ECNUEffects.Evil.get(), PERMANENT_EFFECT_DURATION, 0, false, false, false));
+		if (!this.hasEffect(ECNUEffects.EVIL.get())) {
+			this.addEffect(new MobEffectInstance(ECNUEffects.EVIL.get(), PERMANENT_EFFECT_DURATION, 0, false, false, false));
 		}
 	}
 
@@ -383,6 +377,7 @@ public class ShalltearBloodfallenEntity extends PathfinderMob {
 
 	@Nullable
 	@Override
+	@SuppressWarnings("deprecation")
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType,
 										@Nullable SpawnGroupData spawnGroupData, @Nullable CompoundTag dataTag) {
 		SpawnGroupData data = super.finalizeSpawn(level, difficulty, spawnType, spawnGroupData, dataTag);

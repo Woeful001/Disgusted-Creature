@@ -4,22 +4,10 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.ecnumc.ecnu.common.ECNUContent;
-import org.ecnumc.ecnu.common.registries.ECNUItems;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.alchemy.Potion;
-import net.minecraft.world.item.alchemy.PotionBrewing;
-import net.minecraft.world.item.alchemy.Potions;
-import org.ecnumc.ecnu.common.registries.ECNUPotions;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.Item;
-
-import java.lang.reflect.Method;
 
 /**
  * Mod Main Class

@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[46,)"
+loaderVersion="[47,)"
 license="MIT"
 issueTrackerURL="https://github.com/Viola-Siemens/ECNU-Minecraft-Mod-Template/issues"
 
@@ -18,12 +18,12 @@ Make ECNUMC Great Again!!!
 [[dependencies.disgusted_creature]]
     modId="forge"
     mandatory=true
-    versionRange="[46,)"
+    versionRange="[47,)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.disgusted_creature]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.20,1.21)"
+    versionRange="[1.20.1,1.21)"
     ordering="NONE"
     side="BOTH"

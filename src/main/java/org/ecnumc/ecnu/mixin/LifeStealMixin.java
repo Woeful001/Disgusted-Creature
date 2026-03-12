@@ -69,11 +69,11 @@ public class LifeStealMixin {
             return 0.0F;
         }
 
-        if (!attacker.hasEffect(ECNUEffects.Evil.get()) && !attacker.hasEffect(ECNUEffects.DISGUSTED.get())) {
+        if (!attacker.hasEffect(ECNUEffects.EVIL.get()) && !attacker.hasEffect(ECNUEffects.DISGUSTED.get())) {
             return 0.0F;
         }
 
-        MobEffectInstance effect = attacker.getEffect(ECNUEffects.Evil.get());
+        MobEffectInstance effect = attacker.getEffect(ECNUEffects.EVIL.get());
         if (effect == null) {
             effect = attacker.getEffect(ECNUEffects.DISGUSTED.get());
         }
@@ -83,7 +83,7 @@ public class LifeStealMixin {
 
         float healPercentage = 0.5F;
         try {
-            if (ECNUEffects.Evil.get() instanceof EvilEffect evilEffect) {
+            if (ECNUEffects.EVIL.get() instanceof EvilEffect evilEffect) {
                 healPercentage = evilEffect.getHealPercentage();
             }
         } catch (Exception ignored) {

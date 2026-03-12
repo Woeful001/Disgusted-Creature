@@ -51,7 +51,7 @@ minecraft {
 
             property 'forge.logging.console.level', 'debug'
 
-            property 'forge.enabledGameTestNamespaces', 'ecnu'
+            property 'forge.enabledGameTestNamespaces', 'disgusted_creature'
             arg "-mixin.config=ecnu.mixins.json"
 
             mods {
@@ -70,7 +70,7 @@ minecraft {
 
             property 'forge.logging.console.level', 'debug'
 
-            property 'forge.enabledGameTestNamespaces', 'ecnu'
+            property 'forge.enabledGameTestNamespaces', 'disgusted_creature'
             arg "-mixin.config=ecnu.mixins.json"
 
             mods {
@@ -89,7 +89,7 @@ minecraft {
 
             property 'forge.logging.console.level', 'debug'
 
-            property 'forge.enabledGameTestNamespaces', 'ecnu'
+            property 'forge.enabledGameTestNamespaces', 'disgusted_creature'
             arg "-mixin.config=ecnu.mixins.json"
 
             mods {
@@ -108,7 +108,7 @@ minecraft {
 
             property 'forge.logging.console.level', 'debug'
 
-            args '--mod', 'ecnu', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            args '--mod', 'disgusted_creature', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
             arg "-mixin.config=ecnu.mixins.json"
 
             mods {

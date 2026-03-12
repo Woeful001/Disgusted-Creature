@@ -16,12 +16,14 @@ import static org.ecnumc.ecnu.ECNUForge.MODID;
 /**
  * 自定义效果注册类
  */
+@SuppressWarnings("unused")
 public final class ECNUEffects {
     private static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, MODID);
 
     /**
      * 禁用效果 - 禁用盔甲槽位
      */
+    @SuppressWarnings("unused")
     public static final RegistryObject<MobEffect> BAN = EFFECTS.register("ban", BanEffect::new);
 
     /**
@@ -37,7 +39,8 @@ public final class ECNUEffects {
     /**
      * 阴暗效果 - 造成伤害的部分转化为生命值恢复
      */
-    public static final RegistryObject<MobEffect> Evil = EFFECTS.register("evil", EvilEffect::new);
+    public static final RegistryObject<MobEffect> EVIL = EFFECTS.register("evil", EvilEffect::new);
+
 
     /**
      * 作呕效果 - 复合效果
